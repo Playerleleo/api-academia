@@ -12,6 +12,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "treino")
 public class Treino {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,8 +22,8 @@ public class Treino {
     private String nivel;
     @OneToMany
     private List<Aluno> alunos;
-    private String A;
-    private String B;
-    private String C;
-    private String D;
+    private String treinoA;
+    private String treinoB;
+    private String treinoC;
+    private String treinoD;
 }
