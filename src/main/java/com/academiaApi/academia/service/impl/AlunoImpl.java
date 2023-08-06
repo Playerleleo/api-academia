@@ -9,4 +9,7 @@ public class AlunoImpl implements AlunoService {
     public AlunoOutput cadastrandoAluno(AlunoInput alunoInput) {
         return null;
     }
+    AlunoInput PegaInputAluno(AlunoInput alunoInput){
+        return alunoInput;
+    }
 }
