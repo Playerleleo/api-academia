@@ -10,21 +10,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AlunoImpl implements AlunoService {
     @Autowired
     private AlunoRepository alunoRepository;
+
     @Override
     public AlunoOutput cadastrandoAluno(AlunoInput alunoInput) {
+        var entidadeAluno = new Aluno();
         pegaInputAluno(alunoInput);
-
-
-        return null;
+        var savedEntity = alunoRepository.save(entidadeAluno);
+        return  respostaAluno(savedEntity);
     }
+
     AlunoInput pegaInputAluno(AlunoInput alunoInput){
-        alunoInput.setNome(alunoInput.getNome());
-        alunoInput.setPlano(alunoInput.getPlano());
-        alunoInput.setTreino(alunoInput.getTreino());
-        alunoInput.setHorario(alunoInput.getHorario());
-        alunoInput.setAtivo(alunoInput.getAtivo());
-        alunoInput.setTelefone(alunoInput.getTelefone());
-        alunoInput.setEmail(alunoInput.getEmail());
+        var entidadeAluno = new Aluno();
+        entidadeAluno.setNome(alunoInput.getNome());
+        entidadeAluno.setPlano(alunoInput.getPlano());
+        entidadeAluno.setTreino(alunoInput.getTreino());
+        entidadeAluno.setHorario(alunoInput.getHorario());
+        entidadeAluno.setAtivo(alunoInput.getAtivo());
+        entidadeAluno.setTelefone(alunoInput.getTelefone());
+        entidadeAluno.setEmail(alunoInput.getEmail());
         return alunoInput;
     }
 
