@@ -19,20 +19,23 @@ public class AlunoImpl implements AlunoService {
 
     @Override
     public AlunoOutput cadastrandoAluno(AlunoInput alunoInput) {
-        var entidadeAluno = new Aluno();
-        pegaInputAluno(alunoInput);
-        var savedEntity = alunoRepository.save(entidadeAluno);
-        return  respostaAluno(savedEntity);
+        Aluno entidadeAluno = pegaInputAluno(alunoInput);
+
+        var saveDb = alunoRepository.save(entidadeAluno);
+
+        AlunoOutput alunoOutput = respostaAluno(entidadeAluno);
+
+        return alunoOutput;
     }
 
-    AlunoInput pegaInputAluno(AlunoInput alunoInput){
+    Aluno pegaInputAluno(AlunoInput alunoInput){
         var entidadeAluno = new Aluno();
         entidadeAluno.setNome(alunoInput.getNome());
         entidadeAluno.setHorario(alunoInput.getHorario());
         entidadeAluno.setTelefone(alunoInput.getTelefone());
         entidadeAluno.setEmail(alunoInput.getEmail());
 
-        return alunoInput;
+        return entidadeAluno;
     }
 
     AlunoOutput respostaAluno(Aluno aluno){
