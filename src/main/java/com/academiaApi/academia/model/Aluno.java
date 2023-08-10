@@ -6,22 +6,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalTime;
-import java.util.UUID;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 @Table(name = "aluno")
 public class Aluno {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private Long id;
     private String nome;
-    @ManyToOne
-    private Plano plano;
-    @ManyToOne
-    private Treino treino;
     private LocalTime horario;
-    private Boolean ativo;
     private String telefone;
     private String email;
 }

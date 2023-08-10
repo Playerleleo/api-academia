@@ -1,15 +1,21 @@
-package com.academiaApi.academia.service.impl;
+package com.academiaApi.academia.service;
 
 import com.academiaApi.academia.dto.AlunoInput;
 import com.academiaApi.academia.dto.AlunoOutput;
 import com.academiaApi.academia.model.Aluno;
 import com.academiaApi.academia.repository.AlunoRepository;
-import com.academiaApi.academia.service.AlunoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+
+@Service
 public class AlunoImpl implements AlunoService {
-    @Autowired
-    private AlunoRepository alunoRepository;
+
+
+ final private AlunoRepository alunoRepository;
+
+    public AlunoImpl(AlunoRepository alunoRepository) {
+        this.alunoRepository = alunoRepository;
+    }
 
     @Override
     public AlunoOutput cadastrandoAluno(AlunoInput alunoInput) {
@@ -22,12 +28,10 @@ public class AlunoImpl implements AlunoService {
     AlunoInput pegaInputAluno(AlunoInput alunoInput){
         var entidadeAluno = new Aluno();
         entidadeAluno.setNome(alunoInput.getNome());
-        entidadeAluno.setPlano(alunoInput.getPlano());
-        entidadeAluno.setTreino(alunoInput.getTreino());
         entidadeAluno.setHorario(alunoInput.getHorario());
-        entidadeAluno.setAtivo(alunoInput.getAtivo());
         entidadeAluno.setTelefone(alunoInput.getTelefone());
         entidadeAluno.setEmail(alunoInput.getEmail());
+
         return alunoInput;
     }
 
@@ -35,10 +39,7 @@ public class AlunoImpl implements AlunoService {
         var resposta = new AlunoOutput();
         resposta.setId(aluno.getId());
         resposta.setNome(aluno.getNome());
-        resposta.setPlano(aluno.getPlano());
-        resposta.setTreino(aluno.getTreino());
         resposta.setHorario(aluno.getHorario());
-        resposta.setAtivo(aluno.getAtivo());
         resposta.setTelefone(aluno.getTelefone());
         resposta.setEmail(aluno.getEmail());
 
