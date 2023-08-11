@@ -6,11 +6,12 @@ import com.academiaApi.academia.repository.AlunoRepository;
 import com.academiaApi.academia.service.AlunoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 public class AlunoController {
 final private AlunoService service;
 
@@ -21,5 +22,11 @@ final private AlunoService service;
     public ResponseEntity<?> cadastrarAluno(@RequestBody AlunoInput alunoInput) {
         AlunoOutput alunoOutput = service.cadastrandoAluno(alunoInput);
         return ResponseEntity.status(HttpStatus.CREATED).body(alunoOutput);
+    }
+
+    @GetMapping("/getall")
+    public ResponseEntity<?> pegandoTodos() {
+        List<AlunoOutput> alunoOutput = service.getAll();
+        return ResponseEntity.ok(alunoOutput);
     }
 }

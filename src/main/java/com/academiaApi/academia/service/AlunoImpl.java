@@ -6,11 +6,12 @@ import com.academiaApi.academia.model.Aluno;
 import com.academiaApi.academia.repository.AlunoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 public class AlunoImpl implements AlunoService {
-
-
  final private AlunoRepository alunoRepository;
 
     public AlunoImpl(AlunoRepository alunoRepository) {
@@ -25,6 +26,24 @@ public class AlunoImpl implements AlunoService {
 
         AlunoOutput alunoOutput = respostaAluno(entidadeAluno);
 
+        return alunoOutput;
+    }
+
+    @Override
+    public List<AlunoOutput> getAll() {
+        List<Aluno> alunos = alunoRepository.findAll();
+        return  alunos.stream()
+                .map(this::convertToAlunoOutput)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public AlunoOutput convertToAlunoOutput(Aluno aluno) {
+        AlunoOutput alunoOutput = new AlunoOutput();
+        alunoOutput.setNome(aluno.getNome());
+        alunoOutput.setHorario(aluno.getHorario());
+        alunoOutput.setTelefone(aluno.getTelefone());
+        alunoOutput.setEmail(aluno.getEmail());
         return alunoOutput;
     }
 
