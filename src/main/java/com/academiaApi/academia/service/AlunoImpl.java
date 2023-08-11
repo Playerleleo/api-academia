@@ -40,6 +40,7 @@ public class AlunoImpl implements AlunoService {
     @Override
     public AlunoOutput convertToAlunoOutput(Aluno aluno) {
         AlunoOutput alunoOutput = new AlunoOutput();
+        alunoOutput.setId(aluno.getId());
         alunoOutput.setNome(aluno.getNome());
         alunoOutput.setHorario(aluno.getHorario());
         alunoOutput.setTelefone(aluno.getTelefone());

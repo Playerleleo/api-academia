@@ -2,7 +2,6 @@ package com.academiaApi.academia.controller;
 
 import com.academiaApi.academia.dto.AlunoInput;
 import com.academiaApi.academia.dto.AlunoOutput;
-import com.academiaApi.academia.model.Aluno;
 import com.academiaApi.academia.repository.AlunoRepository;
 import com.academiaApi.academia.service.AlunoService;
 import org.springframework.http.HttpStatus;
@@ -15,11 +14,9 @@ import java.util.List;
 @CrossOrigin("*")
 public class AlunoController {
 final private AlunoService service;
-final private AlunoRepository repository;
 
-    public AlunoController(AlunoService alunoService, AlunoRepository repository, AlunoRepository repository1) {
+    public AlunoController(AlunoService alunoService, AlunoRepository repository) {
         this.service = alunoService;
-        this.repository = repository1;
     }
     @PostMapping("/aluno")
     public ResponseEntity<?> cadastrarAluno(@RequestBody AlunoInput alunoInput) {
@@ -28,7 +25,8 @@ final private AlunoRepository repository;
     }
 
     @GetMapping("/getall")
-    public List<Aluno> pegandoTodos() {
-        return repository.findAll();
+    public ResponseEntity<?> pegandoTodos() {
+        List<AlunoOutput> alunoOutput = service.getAll();
+        return ResponseEntity.ok(alunoOutput);
     }
 }
