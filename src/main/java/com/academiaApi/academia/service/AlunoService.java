@@ -13,4 +13,6 @@ public interface AlunoService {
     List<AlunoOutput> getAll();
 
     AlunoOutput convertToAlunoOutput(Aluno aluno);
+
+    AlunoOutput getForId(Long id);
 }

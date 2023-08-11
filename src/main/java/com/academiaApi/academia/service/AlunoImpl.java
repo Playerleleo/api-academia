@@ -7,6 +7,7 @@ import com.academiaApi.academia.repository.AlunoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -46,6 +47,20 @@ public class AlunoImpl implements AlunoService {
         alunoOutput.setTelefone(aluno.getTelefone());
         alunoOutput.setEmail(aluno.getEmail());
         return alunoOutput;
+    }
+
+    @Override
+    public AlunoOutput getForId(Long id) {
+        Optional<Aluno> alunoOptional = alunoRepository.findById(id);
+
+        if (alunoOptional.isPresent()) {
+            Aluno aluno = alunoOptional.get();
+            AlunoOutput alunoOutput = convertToAlunoOutput(aluno);
+            return alunoOutput;
+        } else {
+            // Lida com o caso em que o aluno não foi encontrado pelo ID
+            throw new IllegalArgumentException("Aluno não encontrado para o ID: " + id);
+        }
     }
 
     Aluno pegaInputAluno(AlunoInput alunoInput){

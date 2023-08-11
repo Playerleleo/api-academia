@@ -29,4 +29,10 @@ final private AlunoService service;
         List<AlunoOutput> alunoOutput = service.getAll();
         return ResponseEntity.ok(alunoOutput);
     }
+
+    @GetMapping("{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id) {
+        AlunoOutput alunoOutput = service.getForId(id);
+        return ResponseEntity.ok(alunoOutput);
+    }
 }
